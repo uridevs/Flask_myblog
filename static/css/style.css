@@ -1,0 +1,14 @@
+h1{
+    color:blue;
+    font-size:44px;
+}
+
+body{
+    background: #f4f4f4;
+}
+
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}

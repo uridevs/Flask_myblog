@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+<h1>BLOG POSTS</h1>
+<br/>
+
+{% for post in posts %}
+    <div class="row">
+        <div class="col-md-6 jobs_index_middle_panels">
+            <div class="card border-dark mb-3 justify-content-center" style="width: 30rem;">
+                <img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30164225/572-768x591.png" class="card-img-top" height="140px" alt="...">
+                <div class="card-header">
+                    #{{ post.slug}}
+                </div>
+                <div class="card-body">
+                <h3 class="card-title"><a href="{{ url_for('post', id=post.id)}}">{{ post.title}}</a></h3>
+                <h6 class="card-subtitle mb-2 text-muted">By: {{ post.author}} at {{ post.date_posted}}</h6>
+                <p class="card-text">{{ post.content}}</p>
+                <a href="{{ url_for('post', id=post.id)}}" class="btn btn-dark">Read post</a>
+                <a href="{{ url_for('edit_post', id=post.id)}}" class="btn btn-info">Edit post</a>
+            </div>
+        </div>
+    </div>
+        
+{% endfor%}
+
+{% endblock %}

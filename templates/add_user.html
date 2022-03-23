@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ message }}</strong>.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    {% if name %}
+        <h1>User Added!</h1>
+        <br/><br/>
+
+        <table class="table table-striped">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Favorite Color</th>
+            </tr>
+            <tr>
+               
+                {% for our_user in our_users %}
+                    <tr>
+                        <td scope="col">{{our_user.id}}. <a href="{{url_for('update', id=our_user.id)}}">update</a> - <a href="{{url_for('delete', id=our_user.id)}}">delete</a></td>
+                        <td scope="col">{{ our_user.name}}</td>
+                        <td scope="col">{{ our_user.email}}</td>
+                        <td scope="col">{{ our_user.favorite_color}}</td>
+                        <br/>
+                    </tr>
+                {% endfor %}
+                
+            </tr>
+        </table>
+    
+    {% else %}
+    <h1>User List</h1>
+    <br/>
+    <div class="shadow p-3 mb-5 bg-body rounded">
+        <form method="POST">
+            {{ form.hidden_tag()}}
+    
+            {{ form.name.label(class="form-label")}}
+            {{ form.name(class="form-control")}}
+            <br/>
+
+            {{ form.email.label(class="form-label")}}
+            {{ form.email(class="form-control")}}
+            <br/>
+
+            {{ form.password_hash.label(class="form-label")}}
+            {{ form.password_hash(class="form-control")}}
+            <br/>
+
+            {{ form.password_hash2.label(class="form-label")}}
+            {{ form.password_hash2(class="form-control")}}
+            <br/>
+
+            
+
+            {{form.submit(class="btn btn-primary")}}
+        </form>
+    </div>
+
+    <br/><br/>
+    <br/><br/>
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Hash</th>
+            <th scope="col">Favorite Color</th>
+        </tr>
+        {% for our_user in our_users %}
+            <tr>
+                <td scope="col">{{our_user.id}}. <a href="{{url_for('update', id=our_user.id)}}">update</a> - <a href="{{url_for('delete', id=our_user.id)}}">delete</a></td>
+                <td scope="col">{{ our_user.name}}</td>
+                <td scope="col">{{ our_user.email}}</td>
+                <td scope="col">{{ our_user.password_hash | truncate(17)}}</td>
+                <td scope="col">{{ our_user.favorite_color}}</td>
+                <br/>
+            </tr>
+         {% endfor %}
+        
+    </table>
+
+    {% endif %}
+
+
+{% endblock %}

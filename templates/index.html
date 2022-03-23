@@ -1,11 +1,16 @@
-<h1>Hello World!</h1>
+{% extends 'base.html' %}
 
-<p> This is our first page on Flask...</p>
+{% block content %}
 
-<p> My name is {{first_name}}. Welcome!! </p>
-<p>This is what i like in a pizza:</p>
+    <p> This is our first page on Flask...</p>
 
-{% for topping in pizza%}
-    {{topping}}<br/>
-{% endfor %}
-<a href="localhost:5000/user/{{name}}">Link al user</a>
+    <p> My name is {{first_name}}. Welcome!! </p>
+    <p>This is what i like in a pizza:</p>
+
+    {% for topping in pizza%}
+        {{topping}}<br/>
+    {% endfor %}
+    <a href="localhost:5000/user/{{name}}">Link al user</a>
+
+{% endblock %}
+
